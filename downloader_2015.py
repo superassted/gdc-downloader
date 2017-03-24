@@ -5,36 +5,36 @@ import requests
 import os
 import re
 import sys
+from urlparse import urlparse
 from tqdm import tqdm
 from urllib import urlopen
 
-# List of categories available
 categories = {
-    'Ad': 'Advocacy',  
-    'Ai': 'AI',  
-    'Au': 'Audio',  
-    'Bm': 'Business & Marketing',  
+    'Ad': 'Advocacy',
+    'Ai': 'AI',
+    'Au': 'Audio',
+    'Bm': 'Business & Marketing',
     'Cm': 'Community Management',
-    'De': 'Desing',  
+    'De': 'Desing',
     'Es': 'eSports',
     'Ed': 'Game Career - Education',
-    'Gn': 'Game Narrative',  
-    'In': 'Indipendent Games',  
+    'Gn': 'Game Narrative',
+    'In': 'Indipendent Games',
     'Lq': 'Localization - QA',
-    'Mo': 'Monetization',  
-    'Or': 'Other',  
-    'Pr': 'Production',  
-    'Pg': 'Programming',  
-    'Sg': 'Serious Games',  
-    'Ta': 'Smartphone - Table Games',  
-    'On': 'Social - Online Games',  
+    'Mo': 'Monetization',
+    'Or': 'Other',
+    'Pr': 'Production',
+    'Pg': 'Programming',
+    'Sg': 'Serious Games',
+    'Ta': 'Smartphone - Table Games',
+    'On': 'Social - Online Games',
     'Vr': 'Virtual - Augmented Reality',
-    'Va': 'Visual Arts'}  
+    'Va': 'Visual Arts'}
 
 base_vault_url = "http://www.gdcvault.com"
-gdc_url = 'http://www.gdcvault.com/free/gdc-16'
+gdc_url = 'http://www.gdcvault.com/free/gdc-15'
 ds_url = 'http://s3-2u.digitallyspeaking.com/'
-xml_url = 'http://evt.dispeak.com/ubm/gdc/sf16/xml/'
+xml_url = 'http://evt.dispeak.com/ubm/gdc/sf15/xml/'
 
 # possible values 500,800,1300
 quality = '500'
@@ -119,7 +119,6 @@ def get_video_url(link):
 
 
 def _main():
-
     for category in categories:
         cat_url = get_category_url(category)
         video_links = get_video_list_urls(cat_url)
@@ -128,7 +127,7 @@ def _main():
             video_url = get_video_url(link)
             file_name = link.split("/")[-1].replace('-', '')
             if video_url is not None:
-                download_file(video_url, file_name + '.mp4', '2016/' + categories[category])
+                download_file(video_url, file_name + '.mp4', '2015/' + categories[category])
 
 
 if __name__ == "__main__":
